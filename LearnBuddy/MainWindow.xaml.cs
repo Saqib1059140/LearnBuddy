@@ -13,17 +13,24 @@ namespace LearnBuddy
 {
     public partial class MainWindow : Window
     {
-        //Login login = new Login();
-        Dashboard dashboard = new Dashboard();
+        Login login;
+        Registration registration;
 
         public MainWindow()
         {
             InitializeComponent();
+            registration = new Registration(this);
+            login = new Login(this);
         }
 
         private void btn_Registration_Dashboard_Click(object sender, RoutedEventArgs e)
         {
+            registration.ShowRegistration();
+        }
 
+        private void btn_Login_Dashboard_Click(object sender, RoutedEventArgs e)
+        {
+            login.ShowLogin();
         }
     }
 }

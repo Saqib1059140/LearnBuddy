@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace LearnBuddy
 {
-    class Login
+    class Registration
     {
         private MainWindow _mainwindow;
 
-        public Login(MainWindow mainWindow)
+        public Registration(MainWindow mainWindow)
         {
             _mainwindow = mainWindow;
         }
 
-        public void ShowLogin()
+        public void ShowRegistration()
         {
-            _mainwindow.Login.Visibility = System.Windows.Visibility.Visible;
-            _mainwindow.Login.IsSelected = true;
+            _mainwindow.Registrate.Visibility = System.Windows.Visibility.Visible;
+            _mainwindow.Registrate.IsSelected = true;
         }
     }
 }

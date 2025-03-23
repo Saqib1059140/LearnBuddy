@@ -30,15 +30,16 @@
                         Click="btn_Registration_Dashboard_Click"/>
 
                 <Button x:Name="btn_Login_Dashboard" Content="Login" Grid.Row="1" Grid.Column="2" Margin="50,60"
-            Background="#FF5722" Foreground="White" FontSize="90" FontWeight="Bold" Cursor="Hand"/>
+                        Background="#FF5722" Foreground="White" FontSize="90" FontWeight="Bold" Cursor="Hand"
+                        Click="btn_Login_Dashboard_Click"/>
             </Grid>
         </TabItem>
 
         <TabItem Name="Registrate" Header="Registrate" FontSize="30" Visibility="Collapsed">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
                     <RowDefinition Height="70"/>
                     <RowDefinition Height="70"/>
                     <RowDefinition Height="70"/>
@@ -54,7 +55,8 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="btn_Back_Registrate" Content="Back" Grid.Row="0" Grid.Column="0" Margin="30,15"/>
+                <Button x:Name="btn_Back_Registrate" Content="Back" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" 
+                        Width="200" Height="70" Margin="10,40,0,0" FontSize="30"/>
 
                 <ComboBox x:Name="cb_Selection_Registrate" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4" 
                           HorizontalAlignment="Center" VerticalAlignment="Center" Width="900" Margin="10" FontSize="40">
@@ -134,7 +136,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="btn_Logout_Login" Content="Back" HorizontalAlignment="Left" Width="300" Height="90" Margin="10" FontSize="60"/>
+                <Button x:Name="btn_Logout_Login" Content="Back" HorizontalAlignment="Left" Width="200" Height="70" Margin="10,40,0,0" FontSize="30"/>
 
                 <StackPanel Grid.Row="1" Margin="0,30" VerticalAlignment="Center">
                     <Label Content="Username" HorizontalAlignment="Center" Width="800" FontSize="60"/>
