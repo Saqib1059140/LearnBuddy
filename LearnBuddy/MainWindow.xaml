@@ -43,6 +43,8 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
+                <Button x:Name="btn_Logout_Login" Content="Back" HorizontalAlignment="Left" Width="300" Height="90" Margin="10" FontSize="60"/>
+
                 <StackPanel Grid.Row="1" Margin="0,30" VerticalAlignment="Center">
                     <Label Content="Username" HorizontalAlignment="Center" Width="800" FontSize="60"/>
                     <TextBox x:Name="btn_Username_Login" HorizontalAlignment="Center" Width="800" FontSize="60" Margin="0,0,0,60"/>
@@ -52,7 +54,7 @@
             </Grid>
         </TabItem>
 
-        <TabItem Name="Dashboard_Tutor_Private" Header="Dashboard Tutor" FontSize="30" Visibility="Visible">
+        <TabItem Name="Dashboard_Tutor_Private" Header="Tutor" FontSize="30" Visibility="Visible">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="130"/>
@@ -64,7 +66,13 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Welcome Tutor" HorizontalAlignment="Center" FontSize="80" Margin="0,5,0,15"/>
-                <ComboBox x:Name="cb_Options_Private" Grid.Row="1" HorizontalAlignment="Center" Width="900" FontSize="90" Margin="0,0,0,5"/>
+
+                <Button x:Name="btn_Logout_Tutor" Grid.Row="0" HorizontalAlignment="Right" Width="300" Margin="15" Content="Logout" FontSize="60"/>
+
+                <ComboBox x:Name="cb_Options_Tutor" Grid.Row="1" HorizontalAlignment="Center" Width="900" FontSize="90" Margin="0,0,0,5">
+                    <ComboBoxItem Content="Nachhilfe Ansicht"/>
+                    <ComboBoxItem Content="Tutoren"/>
+                </ComboBox>
 
                 <DataGrid x:Name="dg_ShowTutoring_Private" Grid.Row="2" Margin="10,15,10,10">
                     <DataGrid.Columns>
@@ -74,6 +82,47 @@
                         <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="166"/>
                     </DataGrid.Columns>
                 </DataGrid>
+            </Grid>
+        </TabItem>
+
+        <TabItem Name="Admin" Header="Admin" Visibility="Visible" FontSize="30">
+            <Grid x:Name="AdminMenu">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="130"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="320"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Welcome Admin" HorizontalAlignment="Center" FontSize="80" Margin="0,5,0,15"/>
+
+                <Button x:Name="btn_Logout_Admin" Grid.Column="1" HorizontalAlignment="Right" Width="300" Margin="15" Content="Logout" FontSize="60"/>
+                
+                <ComboBox x:Name="cb_Options_Admin" Grid.Row="1" HorizontalAlignment="Center" Width="900" FontSize="90" Margin="0,0,0,5">
+                    <ComboBoxItem Content="Nachhilfe Ansicht"/>
+                    <ComboBoxItem Content="Tutoren"/>
+                    <ComboBoxItem Content="Tutoren"/>
+                </ComboBox>
+
+                <DataGrid x:Name="dt_Output" Grid.Row="2" Margin="10" Background="#88ac8c" IsReadOnly="False" CanUserAddRows="False" ColumnWidth="*" FontSize="30   "/>
+
+                <Grid Grid.Row="2" Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="btn_EditEntry" Content="Einträge verwalten" Grid.Row="0" FontSize="20" Margin="10,20" Background="#f79e1b" Click="btn_EditEntry_Click" Cursor=""/>
+                    <Button x:Name="btn_AcceptTutor" Content="Tutor Akzeptieren" Grid.Row="1" FontSize="20" Margin="10,20" Background="#f79e1b" Click="btn_AcceptTutor_Click"/>
+                    <Button x:Name="btn_TutorDecline" Content="Tutor Ablehnen" Grid.Row="2" FontSize="20" Margin="10,20" Background="#f79e1b" Click="btn_TutorDecline_Click"/>
+                    <Button x:Name="btn_BlockStudent" Content="Schüler Sperren" Grid.Row="3" FontSize="20" Margin="10,20" Background="#f79e1b" Click="btn_BlockStudent_Click"/>
+                </Grid>
             </Grid>
         </TabItem>
     </TabControl>
