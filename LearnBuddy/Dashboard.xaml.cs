@@ -14,14 +14,16 @@ using System.Windows.Shapes;
 
 namespace LearnBuddy
 {
-    /// <summary>
-    /// Interaktionslogik für Dashboard.xaml
-    /// </summary>
     public partial class Dashboard : Window
     {
+        ShowDashboard showDashboard;
+
         public Dashboard()
         {
             InitializeComponent();
+            showDashboard = new ShowDashboard(this);
+            showDashboard.Show();
+            showDashboard.Refresh();
         }
     }
 }
