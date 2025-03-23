@@ -6,24 +6,30 @@
         xmlns:local="clr-namespace:LearnBuddy"
         mc:Ignorable="d"
         Title="MainWindow" WindowState="Maximized" d:DesignHeight="1200" d:DesignWidth="1920">
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="400"/>
-            <RowDefinition/>
-            <RowDefinition Height="400"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="200"/>
-        </Grid.ColumnDefinitions>
 
-        <Button x:Name="btn_Registration_Dashboard" Content="Registration" Grid.Row="1" Grid.Column="1" Margin="50,60"
-                Background="#007ACC" Foreground="White" FontSize="90" FontWeight="Bold" Cursor="Hand"/>
+    <TabControl>
+        <TabItem Name="Dashboard_Private" Header="Dashboard" FontSize="30" Visibility="Visible">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="400"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
 
-        <Button x:Name="btn_Login_Dashboard" Content="Login" Grid.Row="1" Grid.Column="2" Margin="50,60"
-                Background="#FF5722" Foreground="White" FontSize="90" FontWeight="Bold" Cursor="Hand"/>
-    </Grid>
+                <Label Content="Welcome To Dashboard" FontSize="90" HorizontalAlignment="Center" FontWeight="Bold" Margin="10,30" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+
+                <Button x:Name="btn_Registration_Dashboard" Content="Registration" Grid.Row="1" Grid.Column="1" Margin="50,60"
+            Background="#007ACC" Foreground="White" FontSize="90" FontWeight="Bold" Cursor="Hand"/>
+
+                <Button x:Name="btn_Login_Dashboard" Content="Login" Grid.Row="1" Grid.Column="2" Margin="50,60"
+            Background="#FF5722" Foreground="White" FontSize="90" FontWeight="Bold" Cursor="Hand"/>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Window>
