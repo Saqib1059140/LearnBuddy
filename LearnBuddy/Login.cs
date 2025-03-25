@@ -40,11 +40,11 @@ namespace LearnBuddy
             {
                 db.ConfirmLogin(email, password);
 
-                if (db.correctLogin == true && email == "Admin")
+                if (db.correctLogin == true)
                 {
                     universal.ShowAdminDashboard();
                 }
-                else if (db.correctLogin == true && email == "tutor@berufskolleg-rheine.de")
+                else if (db.correctLogin == true)
                 {
                     tutor.Fill_cb_FilterSubject_Tutor();
                     tutor.Fill_dg_ShowTutoring_Tutor();

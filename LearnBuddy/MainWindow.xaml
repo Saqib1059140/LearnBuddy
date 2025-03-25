@@ -57,94 +57,103 @@
             </Grid>
         </TabItem>
 
-        <TabItem Name="Registrate" Header="Registrate" FontSize="30" Visibility="Visible">
+        <TabItem Name="Registrate" Header="Registrate" FontSize="30" Visibility="Collapsed">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="100"/>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition Height="70"/>
                     <RowDefinition/>
-                    <RowDefinition Height="90"/>
                 </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="220"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="220"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                <Grid Grid.RowSpan="2">
+                    <Button x:Name="btn_Back_Registrate" Content="Back" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Left"
+                            Width="200" Height="70" Margin="10,40,0,0" FontSize="30" Click="btn_Back_Registrate_Click"/>
 
-                <Button x:Name="btn_Back_Registrate" Content="Back" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" 
-                        Width="200" Height="70" Margin="10,40,0,0" FontSize="30" Click="btn_Back_Registrate_Click"/>
+                    <ComboBox x:Name="cb_Selection_Registrate" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4"
+                              HorizontalAlignment="Center" VerticalAlignment="Center" Width="900" Margin="10" FontSize="40"
+                              SelectionChanged="cb_Selection_Registrate_SelectionChanged">
 
-                <ComboBox x:Name="cb_Selection_Registrate" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4" 
-                          HorizontalAlignment="Center" VerticalAlignment="Center" Width="900" Margin="10" FontSize="40" 
-                          SelectionChanged="cb_Selection_Registrate_SelectionChanged">
+                        <ComboBoxItem Content="Für Nachhilfe Registrieren"/>
+                        <ComboBoxItem Content="Als Tutor Registrieren"/>
+                    </ComboBox>
+                </Grid>
 
-                    <ComboBoxItem Content="Für Nachhilfe Registrieren"/>
-                    <ComboBoxItem Content="Als Tutor Registrieren"/>
-                </ComboBox>
+                <Grid x:Name="Grid_Tutoring_Registrate" Grid.Row="2" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="90"/>
+                    </Grid.RowDefinitions>
 
-                <Label Content="Name" Grid.Row="2" Margin="10" FontSize="30"/>
-                <TextBox x:Name="tb_Name_Registrate" Grid.Row="2" Grid.Column="1" Margin="10,10,10,10" FontSize="30"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                <Label Content="Nachname" Grid.Row="2" Grid.Column="2" Margin="20,10,20,10" FontSize="30"/>
-                <TextBox x:Name="tb_LastName_Registrate" Grid.Row="2" Grid.Column="3" Margin="10,10,10,10" FontSize="30"/>
+                    <Label Content="Name" Grid.Row="0" Margin="10" FontSize="30"/>
+                    <TextBox x:Name="tb_Name_Registrate" Grid.Row="0" Grid.Column="1" Margin="10,10,10,10" FontSize="30"/>
 
-                <Label Content="Geschlecht" Grid.Row="3" Margin="11,10,10,10" FontSize="30"/>
-                <ComboBox x:Name="cb_Gender_Registrate" Grid.Row="3" Grid.Column="1" Margin="10,10,10,10" FontSize="30">
+                    <Label Content="Nachname" Grid.Row="0" Grid.Column="2" Margin="20,10,20,10" FontSize="30"/>
+                    <TextBox x:Name="tb_LastName_Registrate" Grid.Row="0" Grid.Column="3" Margin="10,10,10,10" FontSize="30"/>
 
-                    <ComboBoxItem Content="m"/>
-                    <ComboBoxItem Content="w"/>
-                    <ComboBoxItem Content="d"/>
-                </ComboBox>
+                    <Label Content="Geschlecht" Grid.Row="1" Margin="11,10,10,10" FontSize="30"/>
+                    <ComboBox x:Name="cb_Gender_Registrate" Grid.Row="1" Grid.Column="1" Margin="10,10,10,10" FontSize="30">
 
-                <Label Content="Email" Grid.Row="3" Grid.Column="2" Margin="11,10,10,10" FontSize="30"/>
-                <TextBox x:Name="tb_Email_Registrate" Grid.Row="3" Grid.Column="3" Margin="10,10,10,10" FontSize="30"/>
+                        <ComboBoxItem Content="m"/>
+                        <ComboBoxItem Content="w"/>
+                        <ComboBoxItem Content="d"/>
+                    </ComboBox>
 
-                <Label Content="Klasse" Grid.Row="4" Grid.Column="0" Margin="10,10,10,10" FontSize="30"/>
-                <ComboBox x:Name="cb_Class_Registrate" Grid.Row="4" Grid.Column="1" Margin="10,10,10,10" FontSize="30"/>
+                    <Label Content="Email" Grid.Row="1" Grid.Column="2" Margin="11,10,10,10" FontSize="30"/>
+                    <TextBox x:Name="tb_Email_Registrate" Grid.Row="1" Grid.Column="3" Margin="10,10,10,10" FontSize="30"/>
 
-                <Label Content="Bildungsgang" Grid.Row="4" Grid.Column="2" Margin="10,10,10,10" FontSize="30"/>
-                <ComboBox x:Name="cb_Course_Registrate" Grid.Row="4" Grid.Column="3" Margin="10,10,10,10" FontSize="30"/>
+                    <Label Content="Klasse" Grid.Row="2" Grid.Column="0" Margin="10,10,10,10" FontSize="30"/>
+                    <ComboBox x:Name="cb_Class_Registrate" Grid.Row="2" Grid.Column="1" Margin="10,10,10,10" FontSize="30"/>
 
-                <Label Content="Fach" Grid.Row="5" Margin="10,10,10,10" FontSize="30"/>
-                <ComboBox x:Name="cb_Subject_Registrate" Grid.Row="5" Grid.Column="1" Margin="10,10,10,10" FontSize="30"/>
+                    <Label Content="Bildungsgang" Grid.Row="2" Grid.Column="2" Margin="10,10,10,10" FontSize="30"/>
+                    <ComboBox x:Name="cb_Course_Registrate" Grid.Row="2" Grid.Column="3" Margin="10,10,10,10" FontSize="30"/>
 
-                <Label x:Name="lbl_Appointment_Registrate" Content="Termine" Grid.Row="5" Grid.Column="2" Margin="10,10,10,10" 
-                       Visibility="Collapsed" FontSize="30"/>
+                    <Label Content="Fach" Grid.Row="3" Margin="10,10,10,10" FontSize="30"/>
+                    <ComboBox x:Name="cb_Subject_Registrate" Grid.Row="3" Grid.Column="1" Margin="10,10,10,10" FontSize="30"/>
 
-                <ComboBox x:Name="cb_Appointment_Registrate" Grid.Row="5" Grid.Column="3" Margin="10,10,10,10" 
-                          Visibility="Collapsed" FontSize="30">
+                    <Label x:Name="lbl_Appointment_Registrate" Content="Termine" Grid.Row="3" Grid.Column="2" Margin="10,10,10,10" FontSize="30"/>
 
-                    <ComboBoxItem Content="Mo, 16:00 Uhr - 17:00 Uhr"/>
-                    <ComboBoxItem Content="Di, 16:00 Uhr - 17:00 Uhr"/>
-                    <ComboBoxItem Content="Mi, 16:00 Uhr - 17:00 Uhr"/>
-                    <ComboBoxItem Content="Do, 16:00 Uhr - 17:00 Uhr"/>
-                    <ComboBoxItem Content="Fr, 16:00 Uhr - 17:00 Uhr"/>
-                </ComboBox>
+                    <ComboBox x:Name="cb_Appointment_Registrate" Grid.Row="3" Grid.Column="3" Margin="10,10,10,10" FontSize="30">
 
-                <Label x:Name="lbl_Remarks_Registrate" Content="Bemerkungen" Grid.Row="6" Margin="10" 
-                       Visibility="Collapsed" FontSize="30"/>
+                        <ComboBoxItem Content="Mo, 16:00 Uhr - 17:00 Uhr"/>
+                        <ComboBoxItem Content="Di, 16:00 Uhr - 17:00 Uhr"/>
+                        <ComboBoxItem Content="Mi, 16:00 Uhr - 17:00 Uhr"/>
+                        <ComboBoxItem Content="Do, 16:00 Uhr - 17:00 Uhr"/>
+                        <ComboBoxItem Content="Fr, 16:00 Uhr - 17:00 Uhr"/>
+                    </ComboBox>
 
-                <TextBox x:Name="tb_Remarks_Registrate" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" 
-                         Visibility="Collapsed" FontSize="30"/>
+                    <Label x:Name="lbl_Remarks_Registrate" Content="Bemerkungen" Grid.Row="4" Margin="10" FontSize="30"/>
 
-                <Label x:Name="lbl_Password_Registrate" Content="Passwort" Grid.Row="5" Grid.Column="2" Margin="10" 
-                       Visibility="Collapsed" FontSize="30"/>
+                    <TextBox x:Name="tb_Remarks_Registrate" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" FontSize="30"/>
 
-                <TextBox x:Name="tb_Password_Registrate" Grid.Row="5" Grid.Column="3" Margin="10" Visibility="Collapsed" FontSize="30"/>
+                    <Button x:Name="btn_ConfirmTutoringRegistration_Registrate" Content="Nachhilfe Registrieren" Grid.Row="5"
+                            Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="500" Margin="10"
+                            FontSize="40" Click="btn_ConfirmTutoringRegistration_Registrate_Click"/>
+                </Grid>
 
-                <Button x:Name="btn_ConfirmTutoringRegistration_Registrate" Content="Nachhilfe Registrieren" Grid.Row="8" 
-                        Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="500" Margin="10" 
-                        FontSize="40" Visibility="Collapsed" Click="btn_ConfirmTutoringRegistration_Registrate_Click"/>
 
-                <Button x:Name="btn_ConfirmTutorRegistration_Registrate" Content="Tutor Registrieren" Grid.Row="8" Grid.Column="0" 
-                        Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="500" Margin="10" FontSize="40" 
-                        Visibility="Collapsed" Click="btn_ConfirmTutorRegistration_Registrate_Click"/>
+                <StackPanel x:Name="StackPanel_Tutor_Registrate" Grid.Row="2" HorizontalAlignment="Center" Width="1200" 
+                            Margin="0,100" Visibility="Collapsed">
+                                       
+                    <Label Content="Username" Width="900" Margin="0,40,0,5" FontSize="50"/>
+                    <TextBox x:Name="tb_Username_Registrate" Width="900" Margin="0,5,0,25" FontSize="60"/>
+
+                    <Label x:Name="lbl_Password_Registrate" Content="Passwort" Width="900" Margin="0,25,0,5" FontSize="50"/>
+                    <TextBox x:Name="tb_Password_Registrate" Width="900" Margin="0,5,0,20" FontSize="60"/>
+
+                    <Button x:Name="btn_ConfirmTutorRegistration_Registrate" Content="Tutor Registrieren" Width="900" FontSize="60"
+                            Margin="0,20,0,0" Click="btn_ConfirmTutorRegistration_Registrate_Click"/>
+                </StackPanel>
             </Grid>
         </TabItem>
 
@@ -169,7 +178,7 @@
 
                 <DataGrid x:Name="dg_ShowTutoring_Tutor" Grid.Row="2" Margin="10,15,10,10" CanUserAddRows="False" 
                           CanUserDeleteRows="False" IsReadOnly="True" AutoGenerateColumns="False">
-                    
+
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="200"/>
                         <DataGridTextColumn Header="Fach" Binding="{Binding Fach}" Width="220"/>

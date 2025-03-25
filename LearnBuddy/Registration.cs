@@ -33,43 +33,49 @@ namespace LearnBuddy
             if (_mainwindow.cb_Selection_Registrate.SelectedIndex == 0)
             {
                 // make Tutor Registration invisible
-                _mainwindow.lbl_Password_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-                _mainwindow.tb_Password_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-                _mainwindow.tb_Password_Registrate.Clear();
+                //_mainwindow.lbl_Password_Registrate.Visibility = System.Windows.Visibility.Collapsed;
+                //_mainwindow.tb_Password_Registrate.Visibility = System.Windows.Visibility.Collapsed;
+                //_mainwindow.tb_Password_Registrate.Clear();
 
-                _mainwindow.btn_ConfirmTutorRegistration_Registrate.Visibility = System.Windows.Visibility.Collapsed;
+                //_mainwindow.btn_ConfirmTutorRegistration_Registrate.Visibility = System.Windows.Visibility.Collapsed;
 
                 // make Tutoring Registration visible
-                _mainwindow.lbl_Appointment_Registrate.Visibility = System.Windows.Visibility.Visible;
-                _mainwindow.cb_Appointment_Registrate.Visibility = System.Windows.Visibility.Visible;
-                _mainwindow.cb_Appointment_Registrate.Text = "Termin Wählen";
+                //_mainwindow.lbl_Appointment_Registrate.Visibility = System.Windows.Visibility.Visible;
+                //_mainwindow.cb_Appointment_Registrate.Visibility = System.Windows.Visibility.Visible;
+                //_mainwindow.cb_Appointment_Registrate.Text = "Termin Wählen";
 
-                _mainwindow.lbl_Remarks_Registrate.Visibility = System.Windows.Visibility.Visible;
-                _mainwindow.tb_Remarks_Registrate.Visibility = System.Windows.Visibility.Visible;
-                _mainwindow.tb_Remarks_Registrate.Clear();
+                //_mainwindow.lbl_Remarks_Registrate.Visibility = System.Windows.Visibility.Visible;
+                //_mainwindow.tb_Remarks_Registrate.Visibility = System.Windows.Visibility.Visible;
+                //_mainwindow.tb_Remarks_Registrate.Clear();
 
-                _mainwindow.btn_ConfirmTutoringRegistration_Registrate.Visibility = System.Windows.Visibility.Visible;
+                //_mainwindow.btn_ConfirmTutoringRegistration_Registrate.Visibility = System.Windows.Visibility.Visible;
+
+                _mainwindow.Grid_Tutoring_Registrate.Visibility = System.Windows.Visibility.Visible;
+                _mainwindow.StackPanel_Tutor_Registrate.Visibility = System.Windows.Visibility.Collapsed;
 
                 FillCbData();
             }
             else if (_mainwindow.cb_Selection_Registrate.SelectedIndex == 1)
             {
                 // make Tutoring Registration invisible
-                _mainwindow.lbl_Appointment_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-                _mainwindow.cb_Appointment_Registrate.Visibility = System.Windows.Visibility.Collapsed;
+                //_mainwindow.lbl_Appointment_Registrate.Visibility = System.Windows.Visibility.Collapsed;
+                //_mainwindow.cb_Appointment_Registrate.Visibility = System.Windows.Visibility.Collapsed;
 
-                _mainwindow.lbl_Remarks_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-                _mainwindow.tb_Remarks_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-                _mainwindow.tb_Remarks_Registrate.Clear();
+                //_mainwindow.lbl_Remarks_Registrate.Visibility = System.Windows.Visibility.Collapsed;
+                //_mainwindow.tb_Remarks_Registrate.Visibility = System.Windows.Visibility.Collapsed;
+                //_mainwindow.tb_Remarks_Registrate.Clear();
 
-                _mainwindow.btn_ConfirmTutoringRegistration_Registrate.Visibility = System.Windows.Visibility.Collapsed;
+                //_mainwindow.btn_ConfirmTutoringRegistration_Registrate.Visibility = System.Windows.Visibility.Collapsed;
 
                 // make Tutor Registration visible
-                _mainwindow.lbl_Password_Registrate.Visibility = System.Windows.Visibility.Visible;
-                _mainwindow.tb_Password_Registrate.Visibility = System.Windows.Visibility.Visible;
-                _mainwindow.tb_Password_Registrate.Clear();
+                //_mainwindow.lbl_Password_Registrate.Visibility = System.Windows.Visibility.Visible;
+                //_mainwindow.tb_Password_Registrate.Visibility = System.Windows.Visibility.Visible;
+                //_mainwindow.tb_Password_Registrate.Clear();
 
-                _mainwindow.btn_ConfirmTutorRegistration_Registrate.Visibility = System.Windows.Visibility.Visible;
+                //_mainwindow.btn_ConfirmTutorRegistration_Registrate.Visibility = System.Windows.Visibility.Visible;
+
+                _mainwindow.Grid_Tutoring_Registrate.Visibility = System.Windows.Visibility.Collapsed;
+                _mainwindow.StackPanel_Tutor_Registrate.Visibility = System.Windows.Visibility.Visible;
 
                 FillCbData();
             }
@@ -143,24 +149,25 @@ namespace LearnBuddy
         {
             string name = _mainwindow.tb_Name_Registrate.Text.Trim();
             string lastname = _mainwindow.tb_LastName_Registrate.Text.Trim();
-            string subject = _mainwindow.cb_Subject_Registrate.Text.Trim();
+            string gender = _mainwindow.cb_Gender_Registrate.Text.Trim();
             string email = _mainwindow.tb_Email_Registrate.Text.Trim();
+            string subject = _mainwindow.cb_Subject_Registrate.Text.Trim();
             string remarks = _mainwindow.tb_Remarks_Registrate.Text.Trim();
             string CreatetAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string course = _mainwindow.cb_Course_Registrate.Text.Trim();
 
-
-            string gender = _mainwindow.cb_Gender_Registrate.Text.Trim();
-            
-
             try
             {
-                db.AuthenticateStudentAndGetData(name, lastname, email, subject, course);
+                db.AuthenticateStudentAndGetData(name, lastname, gender, email, subject, course);
                 if (db.studentExists == true)
                 {
                     db.ExecuteQuery(
-                        $"INSERT INTO `nachhilfegesuch`(`SchuelerID`, `FachID`, `Beschreibung`, `ErstelltAm`, `Status`) " +
-                        $"VALUES ('{db.StudentID}','{db.FachID}','{db.BildungsgangsID}','{remarks}','{CreatetAt}','[value-5]')");
+                        $"INSERT INTO nachhilfegesuch (`SchuelerID`, `FachID`, `BildungsgangsID`, `Beschreibung`, `ErstelltAm`, `Status`) " +
+                        $"VALUES ('{db.StudentID}','{db.FachID}','{db.BildungsgangsID}','{remarks}','{CreatetAt}','Offen')");
+                }
+                else
+                {
+                    MessageBox.Show("Schüler existiert nicht");
                 }
             }
             catch (Exception ex)
@@ -171,7 +178,33 @@ namespace LearnBuddy
 
         public void AddTutor()
         {
+            string name = _mainwindow.tb_Name_Registrate.Text.Trim();
+            string lastname = _mainwindow.tb_LastName_Registrate.Text.Trim();
+            string gender = _mainwindow.cb_Gender_Registrate.Text.Trim();
+            string email = _mainwindow.tb_Email_Registrate.Text.Trim();
+            string subject = _mainwindow.cb_Subject_Registrate.Text.Trim();
+            string remarks = _mainwindow.tb_Remarks_Registrate.Text.Trim();
+            string CreatetAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string course = _mainwindow.cb_Course_Registrate.Text.Trim();
 
+            try
+            {
+                db.AuthenticateStudentAndGetData(name, lastname, gender, email, subject, course);
+                if (db.studentExists == true)
+                {
+                    db.ExecuteQuery(
+                        $"INSERT INTO nachhilfegesuch (`SchuelerID`, `FachID`, `BildungsgangsID`, `Beschreibung`, `ErstelltAm`, `Status`) " +
+                        $"VALUES ('{db.StudentID}','{db.FachID}','{db.BildungsgangsID}','{remarks}','{CreatetAt}','Offen')");
+                }
+                else
+                {
+                    MessageBox.Show("Schüler existiert nicht");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Hinzufügen der Nachhilfegesuch: " + ex.Message);
+            }
         }
     }
 }

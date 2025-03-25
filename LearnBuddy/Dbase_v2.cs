@@ -218,7 +218,7 @@ namespace Database
             return correctLogin;
         }
 
-        public void AuthenticateStudentAndGetData(string name, string lastname, string email, string subject, string course)
+        public void AuthenticateStudentAndGetData(string name, string lastname, string gender, string email, string subject, string course)
         {
             int studentId = -1;
             
@@ -226,13 +226,14 @@ namespace Database
             {   // Check if student exists
                 string query =
                 $"SELECT s.vorname, s.nachname , email FROM schueler s " +
-                $"WHERE s.vorname LIKE @name AND s.nachname = @lastname AND s.email = @email";
+                $"WHERE s.vorname LIKE @name AND s.nachname = @lastname AND s.email = @email AND s.gender = @gender";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@name", name + "%");
                     cmd.Parameters.AddWithValue("@lastname", lastname);
                     cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@gender", gender);
 
                     connection.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
