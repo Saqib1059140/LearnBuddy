@@ -140,11 +140,11 @@
 
                 <Button x:Name="btn_ConfirmTutoringRegistration_Registrate" Content="Nachhilfe Registrieren" Grid.Row="8" 
                         Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="500" Margin="10" 
-                        FontSize="40" Visibility="Collapsed"/>
+                        FontSize="40" Visibility="Collapsed" Click="btn_ConfirmTutoringRegistration_Registrate_Click"/>
 
                 <Button x:Name="btn_ConfirmTutorRegistration_Registrate" Content="Tutor Registrieren" Grid.Row="8" Grid.Column="0" 
                         Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="500" Margin="10" FontSize="40" 
-                        Visibility="Collapsed"/>
+                        Visibility="Collapsed" Click="btn_ConfirmTutorRegistration_Registrate_Click"/>
             </Grid>
         </TabItem>
 

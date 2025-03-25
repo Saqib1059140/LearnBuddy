@@ -1,11 +1,13 @@
 ﻿using Database;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Markup;
 
 namespace LearnBuddy
 {
@@ -135,6 +137,41 @@ namespace LearnBuddy
             {
                 MessageBox.Show("Fehler beim Laden der Daten: " + ex.Message);
             }
+        }
+
+        public void AddTutoring()
+        {
+            string name = _mainwindow.tb_Name_Registrate.Text.Trim();
+            string lastname = _mainwindow.tb_LastName_Registrate.Text.Trim();
+            string subject = _mainwindow.cb_Subject_Registrate.Text.Trim();
+            string email = _mainwindow.tb_Email_Registrate.Text.Trim();
+            string remarks = _mainwindow.tb_Remarks_Registrate.Text.Trim();
+            string CreatetAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string course = _mainwindow.cb_Course_Registrate.Text.Trim();
+
+
+            string gender = _mainwindow.cb_Gender_Registrate.Text.Trim();
+            
+
+            try
+            {
+                db.AuthenticateStudentAndGetData(name, lastname, email, subject, course);
+                if (db.studentExists == true)
+                {
+                    db.ExecuteQuery(
+                        $"INSERT INTO `nachhilfegesuch`(`SchuelerID`, `FachID`, `Beschreibung`, `ErstelltAm`, `Status`) " +
+                        $"VALUES ('{db.StudentID}','{db.FachID}','{db.BildungsgangsID}','{remarks}','{CreatetAt}','[value-5]')");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Hinzufügen der Nachhilfegesuch: " + ex.Message);
+            }
+        }
+
+        public void AddTutor()
+        {
+
         }
     }
 }

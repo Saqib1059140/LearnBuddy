@@ -59,6 +59,16 @@ namespace LearnBuddy
             universal.Logout();
         }
 
+        private void btn_ConfirmTutoringRegistration_Registrate_Click(object sender, RoutedEventArgs e)
+        {
+            registration.AddTutoring();
+        }
+
+        private void btn_ConfirmTutorRegistration_Registrate_Click(object sender, RoutedEventArgs e)
+        {
+            registration.AddTutor();
+        }
+
         // ComboBox Configs
 
         private void cb_FilterSubject_Tutor_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -70,7 +80,5 @@ namespace LearnBuddy
         {
             registration.ShowSelectionChangedRegistration();
         }
-
-        
     }
 }

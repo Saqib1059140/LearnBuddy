@@ -29,6 +29,7 @@ namespace Database
         public bool studentExists = false;
         public int StudentID = 0;
         public int FachID = 0;
+        public int BildungsgangsID = 0;
 
 
         #region Konstruktor
@@ -217,22 +218,21 @@ namespace Database
             return correctLogin;
         }
 
-        public bool AuthenticateStudent(string name, string lastname)
+        public void AuthenticateStudentAndGetData(string name, string lastname, string email, string subject, string course)
         {
             int studentId = -1;
-
-            string query =
-                $"SELECT s.vorname, s.nachname " +
-                $"FROM schueler s " +
-                $"WHERE s.vorname LIKE @name " +
-                $"AND s.nachname = @lastname ";
-
+            
             try
-            {
+            {   // Check if student exists
+                string query =
+                $"SELECT s.vorname, s.nachname , email FROM schueler s " +
+                $"WHERE s.vorname LIKE @name AND s.nachname = @lastname AND s.email = @email";
+
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@name", name + "%");
                     cmd.Parameters.AddWithValue("@lastname", lastname);
+                    cmd.Parameters.AddWithValue("@email", email);
 
                     connection.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -252,10 +252,10 @@ namespace Database
                 throw new Exception("Fehler: Der Schüler existiert nicht in der Datenbank.");
             }
 
-            string getStudentID = $"select schuelerID from schueler s where s.vorname = '{name}' and s.nachname = '{lastname}'";
-
             try
-            {
+            {   // Get student ID
+                string getStudentID = $"select schuelerID from schueler s where s.vorname = @name and s.nachname = @lastname";
+
                 using (MySqlCommand cmd = new MySqlCommand(getStudentID, connection))
                 {
                     cmd.Parameters.AddWithValue("@name", name);
@@ -266,7 +266,7 @@ namespace Database
                     {
                         if (reader.Read())
                         {
-                            studentId = reader.GetInt32(0); // Indexbasiertes Abrufen der ID
+                            studentId = reader.GetInt32(0);
                             StudentID = studentId;
                         }
                     }
@@ -278,78 +278,13 @@ namespace Database
                 throw new Exception($"Fehler: {ex}");
             }
 
-            return studentExists;
-
-        }
-
-        public bool AddStudentTutoring(string name, string lastname, string fach)
-        {
-            int studentId = -1;
-
-            // Überprüft ob der schüler in der DB existiert
-            string query =
-                $"SELECT s.vorname, s.nachname FROM schueler s WHERE s.vorname LIKE @name AND s.nachname = @lastname ";
-
             try
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+            {   // Get subject ID
+                string getSubjectID = $"select fachID from fach f where f.bezeichnung = @subject";
+
+                using (MySqlCommand cmd = new MySqlCommand(getSubjectID, connection))
                 {
-                    cmd.Parameters.AddWithValue("@name", name + "%");
-                    cmd.Parameters.AddWithValue("@lastname", lastname);
-
-                    connection.Open();
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        studentExists = reader.HasRows;
-                    }
-                    connection.Close();
-                }
-            }
-            catch (MySqlException ex)
-            {
-                throw new Exception("Datenbankfehler: " + ex.Message);
-            }
-
-            if (!studentExists)
-            {
-                throw new Exception("Fehler: Der Schüler existiert nicht in der Datenbank.");
-            }
-
-            // holt die id vom Schüler
-            string queryGetStudentID = $"select schuelerID from schueler s where s.vorname = @name and s.nachname = @lastname";
-
-            try
-            {
-                using (MySqlCommand cmd = new MySqlCommand(queryGetStudentID, connection))
-                {
-                    cmd.Parameters.AddWithValue("@name", name);
-                    cmd.Parameters.AddWithValue("@lastname", lastname);
-
-                    connection.Open();
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            studentId = reader.GetInt32(0); // Indexbasiertes Abrufen der ID
-                            StudentID = studentId;
-                        }
-                    }
-                    connection.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Fehler: {ex}");
-            }
-
-            // holt die Fachid
-            string queryGetStudentFachID = $"select fachid from fach f where f.Bezeichnung = @fach";
-
-            try
-            {
-                using (MySqlCommand cmd = new MySqlCommand(queryGetStudentFachID, connection))
-                {
-                    cmd.Parameters.AddWithValue("@fach", fach);
+                    cmd.Parameters.AddWithValue("@subject", subject);
 
                     connection.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -367,88 +302,30 @@ namespace Database
                 throw new Exception($"Fehler: {ex}");
             }
 
-            return studentExists;
-        }
-
-        public int AuthenticateExistingStudentAndGetId(string name, string lastname, string gender, string email, string Class, string course, string subject)
-        {
-            int studentId = -1;
-            int subjectId = -1;
-
-            // Überprüft ob der schüler in der DB existiert
-            string CheckStudentExists =
-                $"SELECT s.vorname, s.nachname " +
-                $"FROM schueler s " +
-                $"JOIN bildungsgang b ON s.bildungsgangid = b.bildungsgangid " +
-                $"WHERE s.vorname LIKE @name " +
-                $"AND s.nachname = @lastname ";
-
             try
-            {
-                using (MySqlCommand cmd = new MySqlCommand(CheckStudentExists, connection))
+            {   // Get Bildungsgangs ID
+                string getCourseID = $"select BildungsgangID from Bildungsgang b where b.bezeichnung = @course";
+
+                using (MySqlCommand cmd = new MySqlCommand(getCourseID, connection))
                 {
-                    cmd.Parameters.AddWithValue("@name", name + "%");
-                    cmd.Parameters.AddWithValue("@lastname", lastname);
+                    cmd.Parameters.AddWithValue("@course", course);
 
                     connection.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            studentId = reader.GetInt32("schuelerid");
+                            BildungsgangsID = reader.GetInt32(0);
                         }
                     }
                     connection.Close();
                 }
-
-                if (studentId == -1)
-                {
-                    throw new Exception("Fehler: Der Schüler existiert nicht in der Datenbank.");
-                }
-
-                // holt die id vom Schüler
-
-                string subjectQuery = @" SELECT fachid FROM fach WHERE bezeichnung = @subject";
-
-                string getStudentID = $"select schuelerID from schueler s where s.vorname = '{name}' and s.nachname = '{lastname}'";
-
-                try
-                {
-                    using (MySqlCommand cmd = new MySqlCommand(getStudentID, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@name", name);
-                        cmd.Parameters.AddWithValue("@lastname", lastname);
-
-                        connection.Open();
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                studentId = reader.GetInt32(0); // Indexbasiertes Abrufen der ID
-                            }
-                        }
-                        connection.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"Fehler: {ex}");
-                }
-
-                if (studentId == -1)
-                {
-                    throw new Exception("Fehler: Der Schüler existiert nicht in der Datenbank.");
-                }
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
-                throw new Exception("Datenbankfehler: " + ex.Message);
+                throw new Exception($"Fehler: {ex}");
             }
-
-            return studentId;
         }
-
-
 
         public DataTable ExecuteParameterizedQuery(string query, Dictionary<string, object> parameters)
         {
