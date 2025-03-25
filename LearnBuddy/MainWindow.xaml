@@ -35,6 +35,28 @@
             </Grid>
         </TabItem>
 
+        <TabItem Name="Login" Header="Login" FontSize="30" Visibility="Collapsed">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="200"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="btn_Logout_Login" Content="Back" HorizontalAlignment="Left" Width="200" Height="70"
+                Margin="10,40,0,0" FontSize="30" Click="btn_Logout_Login_Click"/>
+
+                <StackPanel Grid.Row="1" Margin="0,30" VerticalAlignment="Center">
+                    <Label Content="Username" HorizontalAlignment="Center" Width="800" FontSize="60"/>
+                    <TextBox x:Name="tb_Username_Login" HorizontalAlignment="Center" Width="800" FontSize="60" Margin="0,0,0,30"/>
+                    <Label Content="Passwort" HorizontalAlignment="Center" Width="780" Margin="0,30,0,0" FontSize="60"/>
+                    <PasswordBox x:Name="pb_Passwort_Login" HorizontalAlignment="Center" Width="800" FontSize="60"/>
+                    <Button x:Name="btn_Login_Login" Content="Login" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Width="800" Height="90" FontSize="60" Margin="0,60,0,0" Click="btn_Login_Login_Click"/>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+
         <TabItem Name="Registrate" Header="Registrate" FontSize="30" Visibility="Collapsed">
             <Grid>
                 <Grid.RowDefinitions>
@@ -60,7 +82,7 @@
 
                 <ComboBox x:Name="cb_Selection_Registrate" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4" 
                           HorizontalAlignment="Center" VerticalAlignment="Center" Width="900" Margin="10" FontSize="40">
-                    
+
                     <ComboBoxItem Content="Für Nachhilfe Registrieren"/>
                     <ComboBoxItem Content="Als Tutor Registrieren"/>
                 </ComboBox>
@@ -73,7 +95,7 @@
 
                 <Label Content="Geschlecht" Grid.Row="3" Margin="11,10,10,10" FontSize="30"/>
                 <ComboBox x:Name="cb_Gender_Registrate" Grid.Row="3" Grid.Column="1" Margin="10,10,10,10" FontSize="30">
-                    
+
                     <ComboBoxItem Content="m"/>
                     <ComboBoxItem Content="w"/>
                     <ComboBoxItem Content="d"/>
@@ -93,10 +115,10 @@
 
                 <Label x:Name="lbl_Appointment_Registrate" Content="Termine" Grid.Row="5" Grid.Column="2" Margin="10,10,10,10" 
                        Visibility="Collapsed" FontSize="30"/>
-                
+
                 <ComboBox x:Name="cb_Appointment_Registrate" Grid.Row="5" Grid.Column="3" Margin="10,10,10,10" 
                           Visibility="Collapsed" FontSize="30">
-                    
+
                     <ComboBoxItem Content="Mo, 16:00 Uhr - 17:00 Uhr"/>
                     <ComboBoxItem Content="Di, 16:00 Uhr - 17:00 Uhr"/>
                     <ComboBoxItem Content="Mi, 16:00 Uhr - 17:00 Uhr"/>
@@ -106,44 +128,22 @@
 
                 <Label x:Name="lbl_Remarks_Registrate" Content="Bemerkungen" Grid.Row="6" Margin="10" 
                        Visibility="Collapsed" FontSize="30"/>
-                
+
                 <TextBox x:Name="tb_Remarks_Registrate" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" 
                          Visibility="Collapsed" FontSize="30"/>
 
                 <Label x:Name="lbl_Passwort_Registrate" Content="Passwort" Grid.Row="5" Grid.Column="2" Margin="10" 
                        Visibility="Collapsed" FontSize="30"/>
-                
+
                 <TextBox x:Name="tb_Password_Registrate" Grid.Row="5" Grid.Column="3" Margin="10" Visibility="Collapsed" FontSize="30"/>
 
                 <Button x:Name="btn_ConfirmTutoringRegistration_Registrate" Content="Nachhilfe Registrieren" Grid.Row="8" 
                         Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="500" Margin="10" 
                         FontSize="40" Visibility="Collapsed"/>
-                
+
                 <Button x:Name="btn_ConfirmTutorRegistration_Registrate" Content="Tutor Registrieren" Grid.Row="8" Grid.Column="0" 
                         Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="500" Margin="10" FontSize="40" 
                         Visibility="Collapsed"/>
-            </Grid>
-        </TabItem>
-
-        <TabItem Name="Login" Header="Login" FontSize="30" Visibility="Collapsed">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="200"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="200"/>
-                </Grid.RowDefinitions>
-
-                <Button x:Name="btn_Logout_Login" Content="Back" HorizontalAlignment="Left" Width="200" Height="70"
-                        Margin="10,40,0,0" FontSize="30" Click="btn_Logout_Login_Click"/>
-
-                <StackPanel Grid.Row="1" Margin="0,30" VerticalAlignment="Center">
-                    <Label Content="Username" HorizontalAlignment="Center" Width="800" FontSize="60"/>
-                    <TextBox x:Name="tb_Username_Login" HorizontalAlignment="Center" Width="800" FontSize="60" Margin="0,0,0,30"/>
-                    <Label Content="Passwort" HorizontalAlignment="Center" Width="780" Margin="0,30,0,0" FontSize="60"/>
-                    <PasswordBox x:Name="pb_Passwort_Login" HorizontalAlignment="Center" Width="800" FontSize="60"/>
-                    <Button x:Name="btn_Login_Login" Content="Login" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"
-                            Width="800" Height="90" FontSize="60" Margin="0,60,0,0" Click="btn_Login_Login_Click"/>
-                </StackPanel>
             </Grid>
         </TabItem>
 
