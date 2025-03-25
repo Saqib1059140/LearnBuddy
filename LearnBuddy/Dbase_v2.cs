@@ -193,7 +193,7 @@ namespace Database
 
         public bool ConfirmLogin(string username, string password)
         {
-            string query = $"SELECT Count(*) FROM `login` WHERE `E-Mail` = @username AND Passwort = SHA2(@password, 256)";
+            string query = $"SELECT Count(*) FROM login WHERE `E-Mail` = @username AND Passwort = SHA2(@password, 256)";
 
             try
             {

@@ -132,22 +132,22 @@
                     <RowDefinition/>
                     <RowDefinition Height="200"/>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
 
-                <Button x:Name="btn_Logout_Login" Content="Back" HorizontalAlignment="Left" Width="200" Height="70" Margin="10,40,0,0" FontSize="30"/>
+                <Button x:Name="btn_Logout_Login" Content="Back" HorizontalAlignment="Left" Width="200" Height="70"
+                        Margin="10,40,0,0" FontSize="30" Click="btn_Logout_Login_Click"/>
 
                 <StackPanel Grid.Row="1" Margin="0,30" VerticalAlignment="Center">
                     <Label Content="Username" HorizontalAlignment="Center" Width="800" FontSize="60"/>
-                    <TextBox x:Name="btn_Username_Login" HorizontalAlignment="Center" Width="800" FontSize="60" Margin="0,0,0,60"/>
-                    <Label Content="Passwort" Grid.Row="1" HorizontalAlignment="Center" Width="780" Margin="0,30,0,0" FontSize="60"/>
-                    <PasswordBox x:Name="btn_Passwort_Login" Grid.Row="1" HorizontalAlignment="Center" Width="800" FontSize="60"/>
+                    <TextBox x:Name="tb_Username_Login" HorizontalAlignment="Center" Width="800" FontSize="60" Margin="0,0,0,30"/>
+                    <Label Content="Passwort" HorizontalAlignment="Center" Width="780" Margin="0,30,0,0" FontSize="60"/>
+                    <PasswordBox x:Name="pb_Passwort_Login" HorizontalAlignment="Center" Width="800" FontSize="60"/>
+                    <Button x:Name="btn_Login_Login" Content="Login" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top"
+                            Width="800" Height="90" FontSize="60" Margin="0,60,0,0" Click="btn_Login_Login_Click"/>
                 </StackPanel>
             </Grid>
         </TabItem>
 
-        <TabItem Name="Dashboard_Tutor" Header="Tutor" FontSize="30" Visibility="Visible">
+        <TabItem Name="Dashboard_Tutor" Header="Tutor" FontSize="30" Visibility="Collapsed">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="130"/>
