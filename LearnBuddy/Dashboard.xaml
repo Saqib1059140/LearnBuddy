@@ -17,7 +17,7 @@
 
         <Label Content="Nachhilfe Dashboard" FontSize="40" HorizontalAlignment="Center"/>
         <DataGrid x:Name="dg_Dashboard_Public" Grid.Row="1" Margin="10" CanUserAddRows="False" CanUserDeleteRows="False" 
-                  IsReadOnly="True" FontSize="40" AutoGenerateColumns="False">
+                  IsReadOnly="True" AutoGenerateColumns="False" FontSize="40">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Fach" Binding="{Binding Fach}" Width="300"/>
