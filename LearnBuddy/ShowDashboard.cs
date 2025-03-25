@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace LearnBuddy
@@ -27,7 +28,14 @@ namespace LearnBuddy
                 $"join fach f on ng.fachid = f.fachid " +
                 $"where ng.status = 'offen'";
 
-            _dashBoard.dg_Dashboard_Public.ItemsSource = db.QueryToDataTable(query).DefaultView;
+            try
+            {
+                _dashBoard.dg_Dashboard_Public.ItemsSource = db.QueryToDataTable(query).DefaultView;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void Refresh()

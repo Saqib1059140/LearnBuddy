@@ -27,6 +27,8 @@ namespace LearnBuddy
             universal = new Universal(this);
         }
 
+        // Button Configs
+
         private void btn_Registration_Dashboard_Click(object sender, RoutedEventArgs e)
         {
             registration.ShowRegistration();
@@ -35,11 +37,6 @@ namespace LearnBuddy
         private void btn_Login_Dashboard_Click(object sender, RoutedEventArgs e)
         {
             login.ShowTabitemLogin();
-        }
-
-        private void cb_FilterSubject_Tutor_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            tutor.Filtered_dgShowTutoring_Tutor();
         }
 
         private void btn_Logout_Tutor_Click(object sender, RoutedEventArgs e)
@@ -56,5 +53,24 @@ namespace LearnBuddy
         {
             universal.Logout();
         }
+
+        private void btn_Back_Registrate_Click(object sender, RoutedEventArgs e)
+        {
+            universal.Logout();
+        }
+
+        // ComboBox Configs
+
+        private void cb_FilterSubject_Tutor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tutor.Filtered_dgShowTutoring_Tutor();
+        }
+
+        private void cb_Selection_Registrate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            registration.ShowSelectionChangedRegistration();
+        }
+
+        
     }
 }
