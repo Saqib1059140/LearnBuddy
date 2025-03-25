@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Xml.Linq;
 using MySqlConnector;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -26,6 +29,7 @@ namespace Database
         private MySqlConnection? connection = null;
         private MySqlCommand? command = null;
         public bool correctLogin = false;
+        public bool isAdmin = false;
         public bool studentExists = false;
         public int StudentID = 0;
         public int FachID = 0;
@@ -215,18 +219,38 @@ namespace Database
                 throw new Exception("Datenbankfehler: " + ex.Message);
             }
 
+            string CheckisAdmin =
+                $"SELECT admin FROM login WHERE `E-Mail` = @username AND Passwort = SHA2(@password, 256)";
+
+            try
+            {
+                using (MySqlCommand cmd = new MySqlCommand(CheckisAdmin, connection))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
+
+                    connection.Open();
+                    isAdmin = Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+                    connection.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                if (connection != null && connection.State == ConnectionState.Open)
+                    connection.Close();
+                throw new Exception("Datenbankfehler: " + ex.Message);
+            }
+
             return correctLogin;
         }
 
         public void AuthenticateStudentAndGetData(string name, string lastname, string gender, string email, string subject, string course)
         {
-            int studentId = -1;
-            
             try
             {   // Check if student exists
                 string query =
-                $"SELECT s.vorname, s.nachname , email FROM schueler s " +
-                $"WHERE s.vorname LIKE @name AND s.nachname = @lastname AND s.email = @email AND s.gender = @gender";
+                $"SELECT s.vorname, s.nachname, email FROM schueler s " +
+                $"WHERE s.vorname LIKE @name AND s.nachname = @lastname AND s.email = @email AND s.geschlecht = @gender";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
@@ -267,8 +291,7 @@ namespace Database
                     {
                         if (reader.Read())
                         {
-                            studentId = reader.GetInt32(0);
-                            StudentID = studentId;
+                            StudentID = reader.GetInt32(0);
                         }
                     }
                     connection.Close();
@@ -326,6 +349,58 @@ namespace Database
             {
                 throw new Exception($"Fehler: {ex}");
             }
+        }
+
+        public bool AuthenticateTuterAndGetData(string email)
+        {
+            // check if Tutor Exists
+            bool isTutor;
+            try
+            {
+                string query = $"SELECT email FROM schueler WHERE email = @email";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    connection.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        isTutor = reader.HasRows;
+                    }
+                    connection.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception("Datenbankfehler: " + ex.Message);
+            }
+
+            try
+            {   // Get Tutor ID
+                string getTutorID = $"select schuelerID from schueler where email = @email";
+
+                using (MySqlCommand cmd = new MySqlCommand(getTutorID, connection))
+                {
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    connection.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            StudentID = reader.GetInt32(0);
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Fehler: {ex}");
+            }
+
+            return isTutor;
         }
 
         public DataTable ExecuteParameterizedQuery(string query, Dictionary<string, object> parameters)

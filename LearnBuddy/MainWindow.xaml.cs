@@ -62,11 +62,14 @@ namespace LearnBuddy
         private void btn_ConfirmTutoringRegistration_Registrate_Click(object sender, RoutedEventArgs e)
         {
             registration.AddTutoring();
+            universal.Logout();
+
         }
 
         private void btn_ConfirmTutorRegistration_Registrate_Click(object sender, RoutedEventArgs e)
         {
             registration.AddTutor();
+            universal.Logout();
         }
 
         // ComboBox Configs

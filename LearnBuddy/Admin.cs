@@ -8,5 +8,17 @@ namespace LearnBuddy
 {
     class Admin
     {
+        private MainWindow _mainwindow;
+
+        public Admin(MainWindow mainWindow)
+        {
+            _mainwindow = mainWindow;
+        }
+
+        public void ShowAdminDashboard()
+        {
+            _mainwindow.Admin.IsSelected = true;
+            _mainwindow.Login.Visibility = System.Windows.Visibility.Collapsed;
+        }
     }
 }

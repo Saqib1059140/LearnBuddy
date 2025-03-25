@@ -145,7 +145,7 @@
                 <StackPanel x:Name="StackPanel_Tutor_Registrate" Grid.Row="2" HorizontalAlignment="Center" Width="1200" 
                             Margin="0,100" Visibility="Collapsed">
                                        
-                    <Label Content="Username" Width="900" Margin="0,40,0,5" FontSize="50"/>
+                    <Label Content="Email" Width="900" Margin="0,40,0,5" FontSize="50"/>
                     <TextBox x:Name="tb_Username_Registrate" Width="900" Margin="0,5,0,25" FontSize="60"/>
 
                     <Label x:Name="lbl_Password_Registrate" Content="Passwort" Width="900" Margin="0,25,0,5" FontSize="50"/>

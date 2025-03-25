@@ -15,6 +15,7 @@ namespace LearnBuddy
         Dbase db;
         Universal universal;
         Tutor tutor;
+        Admin admin;
         private MainWindow _mainwindow;
 
         public Login(MainWindow mainWindow)
@@ -23,6 +24,7 @@ namespace LearnBuddy
             db = new Dbase();
             universal = new Universal(mainWindow);
             tutor = new Tutor(mainWindow);
+            admin = new Admin(mainWindow);
         }
 
         public void ShowTabitemLogin()
@@ -40,15 +42,18 @@ namespace LearnBuddy
             {
                 db.ConfirmLogin(email, password);
 
-                if (db.correctLogin == true)
+                if (db.correctLogin)
                 {
-                    universal.ShowAdminDashboard();
-                }
-                else if (db.correctLogin == true)
-                {
-                    tutor.Fill_cb_FilterSubject_Tutor();
-                    tutor.Fill_dg_ShowTutoring_Tutor();
-                    universal.ShowTutorDashboard();
+                    if (db.isAdmin == true)
+                    {
+                        admin.ShowAdminDashboard();
+                    }
+                    else
+                    {
+                        tutor.Fill_cb_FilterSubject_Tutor();
+                        tutor.Fill_dg_ShowTutoring_Tutor();
+                        tutor.ShowTutorDashboard();
+                    }
                 }
                 else
                 {

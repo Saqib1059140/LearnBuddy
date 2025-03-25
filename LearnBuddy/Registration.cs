@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.DirectoryServices;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,14 @@ namespace LearnBuddy
     class Registration
     {
         Dbase db;
+        Universal universal;
         private MainWindow _mainwindow;
 
         public Registration(MainWindow mainWindow)
         {
             _mainwindow = mainWindow;
             db = new Dbase();
+            universal = new Universal(mainWindow);
         }
 
         public void ShowRegistration()
@@ -32,24 +35,6 @@ namespace LearnBuddy
         {
             if (_mainwindow.cb_Selection_Registrate.SelectedIndex == 0)
             {
-                // make Tutor Registration invisible
-                //_mainwindow.lbl_Password_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-                //_mainwindow.tb_Password_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-                //_mainwindow.tb_Password_Registrate.Clear();
-
-                //_mainwindow.btn_ConfirmTutorRegistration_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-
-                // make Tutoring Registration visible
-                //_mainwindow.lbl_Appointment_Registrate.Visibility = System.Windows.Visibility.Visible;
-                //_mainwindow.cb_Appointment_Registrate.Visibility = System.Windows.Visibility.Visible;
-                //_mainwindow.cb_Appointment_Registrate.Text = "Termin Wählen";
-
-                //_mainwindow.lbl_Remarks_Registrate.Visibility = System.Windows.Visibility.Visible;
-                //_mainwindow.tb_Remarks_Registrate.Visibility = System.Windows.Visibility.Visible;
-                //_mainwindow.tb_Remarks_Registrate.Clear();
-
-                //_mainwindow.btn_ConfirmTutoringRegistration_Registrate.Visibility = System.Windows.Visibility.Visible;
-
                 _mainwindow.Grid_Tutoring_Registrate.Visibility = System.Windows.Visibility.Visible;
                 _mainwindow.StackPanel_Tutor_Registrate.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -57,23 +42,6 @@ namespace LearnBuddy
             }
             else if (_mainwindow.cb_Selection_Registrate.SelectedIndex == 1)
             {
-                // make Tutoring Registration invisible
-                //_mainwindow.lbl_Appointment_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-                //_mainwindow.cb_Appointment_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-
-                //_mainwindow.lbl_Remarks_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-                //_mainwindow.tb_Remarks_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-                //_mainwindow.tb_Remarks_Registrate.Clear();
-
-                //_mainwindow.btn_ConfirmTutoringRegistration_Registrate.Visibility = System.Windows.Visibility.Collapsed;
-
-                // make Tutor Registration visible
-                //_mainwindow.lbl_Password_Registrate.Visibility = System.Windows.Visibility.Visible;
-                //_mainwindow.tb_Password_Registrate.Visibility = System.Windows.Visibility.Visible;
-                //_mainwindow.tb_Password_Registrate.Clear();
-
-                //_mainwindow.btn_ConfirmTutorRegistration_Registrate.Visibility = System.Windows.Visibility.Visible;
-
                 _mainwindow.Grid_Tutoring_Registrate.Visibility = System.Windows.Visibility.Collapsed;
                 _mainwindow.StackPanel_Tutor_Registrate.Visibility = System.Windows.Visibility.Visible;
 
@@ -164,6 +132,9 @@ namespace LearnBuddy
                     db.ExecuteQuery(
                         $"INSERT INTO nachhilfegesuch (`SchuelerID`, `FachID`, `BildungsgangsID`, `Beschreibung`, `ErstelltAm`, `Status`) " +
                         $"VALUES ('{db.StudentID}','{db.FachID}','{db.BildungsgangsID}','{remarks}','{CreatetAt}','Offen')");
+
+                    MessageBox.Show("Nachhilfe gesuch wurde Gespeichert");
+                    universal.Logout();
                 }
                 else
                 {
@@ -175,35 +146,32 @@ namespace LearnBuddy
                 MessageBox.Show("Fehler beim Hinzufügen der Nachhilfegesuch: " + ex.Message);
             }
         }
-
+            
         public void AddTutor()
         {
-            string name = _mainwindow.tb_Name_Registrate.Text.Trim();
-            string lastname = _mainwindow.tb_LastName_Registrate.Text.Trim();
-            string gender = _mainwindow.cb_Gender_Registrate.Text.Trim();
-            string email = _mainwindow.tb_Email_Registrate.Text.Trim();
-            string subject = _mainwindow.cb_Subject_Registrate.Text.Trim();
-            string remarks = _mainwindow.tb_Remarks_Registrate.Text.Trim();
-            string CreatetAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string course = _mainwindow.cb_Course_Registrate.Text.Trim();
+            string email = _mainwindow.tb_Username_Registrate.Text.Trim();
+            string password = _mainwindow.tb_Password_Registrate.Text.Trim();
 
             try
             {
-                db.AuthenticateStudentAndGetData(name, lastname, gender, email, subject, course);
-                if (db.studentExists == true)
+                if (db.AuthenticateTuterAndGetData(email))
                 {
-                    db.ExecuteQuery(
-                        $"INSERT INTO nachhilfegesuch (`SchuelerID`, `FachID`, `BildungsgangsID`, `Beschreibung`, `ErstelltAm`, `Status`) " +
-                        $"VALUES ('{db.StudentID}','{db.FachID}','{db.BildungsgangsID}','{remarks}','{CreatetAt}','Offen')");
+                    // Create Login
+                    // db.ExecuteQuery($"INSERT INTO login(`E-Mail`, Passwort, admin) VALUES ('{email}', '{password}', '0')");
+
+                    // Create Tutor
+                    db.ExecuteQuery($"INSERT INTO `tutor`(`SchuelerID`, `Genehmigt`, `LoginID`) VALUES ('{db.StudentID}','0','7')");
+                    MessageBox.Show($"Die Nachfrage von für Tutor wurde dem Admin weitergeleitet !");
+                    universal.Logout();
                 }
                 else
                 {
-                    MessageBox.Show("Schüler existiert nicht");
+                    MessageBox.Show("Tutor existiert nicht");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Fehler beim Hinzufügen der Nachhilfegesuch: " + ex.Message);
+                MessageBox.Show("Fehler beim Hinzufügen tutor: " + ex.Message);
             }
         }
     }

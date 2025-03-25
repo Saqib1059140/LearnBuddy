@@ -79,5 +79,11 @@ namespace LearnBuddy
                 MessageBox.Show("Fehler beim Laden der Übersichtsdaten: " + ex.Message);
             }
         }
+
+        public void ShowTutorDashboard()
+        {
+            _mainwindow.Dashboard_Tutor.IsSelected = true;
+            _mainwindow.Login.Visibility = System.Windows.Visibility.Collapsed;
+        }
     }
 }
